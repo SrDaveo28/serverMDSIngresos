@@ -16,7 +16,8 @@ exports.createEgresos = (req, res, next) => {
         nroComprobante: req.body.nroComprobante,
         responsable: req.body.responsable,
         obs: req.body.obs,
-        monto: req.body.monto
+        monto: req.body.monto,
+        state: req.body.state
     });
 
     egreso.save(egreso).then(data => {
