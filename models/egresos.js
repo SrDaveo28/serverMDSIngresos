@@ -9,7 +9,8 @@ const egresos = new mongoose.Schema({
     nroComprobante: { type: String },
     responsable: { type: String },
     obs: { type: String },
-    monto: { type: Number }
+    monto: { type: Number },
+    state: { type: String }
 });
 
 module.exports = Egresos = mongoose.model('egresos', egresos);

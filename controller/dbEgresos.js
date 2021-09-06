@@ -38,7 +38,7 @@ exports.updateEgresos = (req, res) => {
     var id = req.params.id
     var update = req.body;
     const filter = { id: id };
-
+    console.log(update);
 
     Egresos.findOneAndUpdate(filter, update, (err, egresosUpdated) => {
         if (err) {
@@ -77,7 +77,7 @@ exports.findEgresosById = (req, res) => {
     const filter = { id: id };
 
     if (id == null) {
-        Egresos.find({}).exec((err, egresosList) => {
+        Egresos.find({ state: "created" }).exec((err, egresosList) => {
             if (err) {
                 return res.status(500).send({ message: 'Error al devolver los datos' });
             }
@@ -108,4 +108,31 @@ exports.findEgresosById = (req, res) => {
     }
 
 
+}
+
+exports.setStateEgreso = (req, res) => {
+    let body = req.body;
+    let id = req.params.id;
+
+
+    Egresos.findByIdAndUpdate(id, {
+        $set: {
+            state: body.state
+        }
+    },
+        function (error, info) {
+            if (error) {
+                res.json({
+                    resultado: false,
+                    msg: 'No se pudo modificar el documento',
+                    error
+                });
+            } else {
+                res.json({
+                    resultado: true,
+                    info: info
+                })
+            }
+        }
+    )
 }
