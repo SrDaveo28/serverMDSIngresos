@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const egresos = new mongoose.Schema({
 
-    fecha: { type: Number },
+    fecha: { type: Date },
     id: { type: Number },
     usuario: { type: String },
     tipo: { type: String },
